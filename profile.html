@@ -73,7 +73,7 @@
         .profilelist{
             /*background-color: white;*/
             font-size: 4vw;
-            font-family: 'acme';
+            font-family: 'arial';
             color: #181717;
             margin: 2vw 2vw;
             -moz-box-shadow: 0 0 1vw #ccc;
@@ -81,10 +81,26 @@
             box-shadow: 0 0 1vw #ccc;
         }
 
-        .profilelist h3{
-            margin: 2vw 2vw;
+        .profilelist .listtitle{
+            margin: 0 0;
             position: relative;
-            top: 6vw;
+            top: 0;
+            background:linear-gradient(to bottom, #599bb3 5%, #73a4ff 100%);
+	        background-color:#599bb3;
+            color: white;
+            max-width: 100%;
+            height: 10vw;
+            display: block;
+        }
+
+        .listtitle h3{
+            font-family: 'acme';
+            font-weight: lighter;
+            position: absolute;
+            margin-top: 2vw;
+            margin-bottom: 1vw;
+            margin-left: 1vw;
+            color: white;
         }
 
         .medialist{
@@ -95,7 +111,7 @@
         }
 
         .medialist li{
-            margin: 30px 30px;
+            margin: 3vw auto;
             background-color: white;
             -webkit-box-shadow: 0 2vw 3vw -3vw #222;
             -moz-box-shadow: 0 2vw 3vw -3vw #222;
@@ -104,8 +120,13 @@
         }
 
         .medialist li .data{
+            font-size: 4vw;
             list-style: none;
-            font-family: 'acme';
+            position: relative;
+            left: 4vw;
+            margin-top: 2vw;
+            margin-bottom: 4vw;
+            margin-right: 2vw;
         }
 
         .medialist li img,
@@ -114,15 +135,13 @@
             vertical-align: top;
         }
 
-        .medialist li .data{
-            position: relative;
-        }
-
         .medialist li .data .subdata{
+            font-size: 4vw;
             position: absolute;
             font-family: 'arial';
             font-weight: lighter;
-            color: #9ea1a3;
+            /*color: #9ea1a3;*/
+            color: #66aeb9;
             top: 6vw;
         }
 
@@ -130,10 +149,15 @@
             max-width: 30%;
         }
 
+        input {
+            width: 6vw;
+            height: 3vw;
+        }
+
          /* Dropdown Button */
 .dropbtn {
-    box-shadow: 0px 11px 12px 1px #276873;
-	background:linear-gradient(to bottom, #599bb3 5%, #73ecff 100%);
+    box-shadow: 0px 4px 6px 1px #273f73;
+	background:linear-gradient(to bottom, #599bb3 5%, #73a4ff 100%);
 	background-color:#599bb3;
 	border-radius:22px;
 	display:block;
@@ -146,21 +170,17 @@
 	text-shadow:0px 2px 3px #3d768a;
 	width: 20vw;
     position: relative;
-    bottom: 3vw;
+    top: .5%;
+    margin-bottom: 5vw;
     left: 3vw;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #3e8e41;
 }
 
 /* The search field */
 #myInput {
   box-sizing: border-box;
-  background-image: url('searchicon.png');
+  /*background-image: url('searchicon.png');
   background-position: 14px 12px;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   font-size: 16px;
   padding: 14px 20px 12px 45px;
   border: none;
@@ -168,10 +188,10 @@
 }
 
 /* The search field when it gets focus/clicked on */
-#myInput:focus {outline: 3px solid #ddd;}
+[id^="myInput"]:focus {outline: 3px solid #ddd;}
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
+.profilelist .dropdown {
   position: relative;
   display: inline-block;
 }
@@ -222,7 +242,7 @@
     <main>
 
         <section class="profilelist">
-        <h3>Watching</h3>
+        <span class="listtitle"><h3>Watching</h3></span>
         <ol class="medialist">
             <li>
                 <img src="img/startrektng.png" alt="tv show image">
@@ -239,6 +259,9 @@
                     <h4 class="title">Title</h4>
                     <div class="subdata">
                         <p><span class="year">Year&nbsp;&middot;&nbsp;</span><span class="producers">Producers</span></p>
+                        <!--<form>
+                            <input type="number" name="episodes" id="episodes1" placeholder="-"><span class="total">/178</span>
+                        </form>-->
                     </div>
                 </div>
             </li>
@@ -272,7 +295,7 @@
         </ol>
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Add Watching</button>
-            <div id="dropdown1" class="dropdown-content">
+            <div id="dropdown" class="dropdown-content">
               <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
               <a href="#startrektng">Star Trek: Next Generation</a>
               <a href="#24">24</a>
@@ -287,7 +310,7 @@
         </section>
 
         <section class="profilelist">
-            <h3>Favorite Shows</h3>
+            <span class="listtitle"><h3>Favorite Shows</h3></span>
             <ol class="medialist">
                 <li>
                     <img src="img/startrektng.png" alt="tv show image">
@@ -337,8 +360,8 @@
             </ol>
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Add Favorite</button>
-                <div id="dropdown2" class="dropdown-content">
-                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                <div id="dropdown1" class="dropdown-content">
+                  <input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction1()">
                   <a href="#startrektng">Star Trek: Next Generation</a>
                   <a href="#24">24</a>
                   <a href="#aos">Agents of SHIELD</a>
@@ -352,7 +375,7 @@
             </section>
 
             <section class="profilelist">
-                <h3>Watched</h3>
+                <span class=listtitle><h3>Watched</h3></span>
                 <ol class="medialist">
                     <li>
                         <img src="img/startrektng.png" alt="tv show image">
@@ -401,9 +424,9 @@
                     </li>
                 </ol>
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Add Watched</button>
-                    <div id="dropdown3" class="dropdown-content">
-                      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    <button onclick="myFunction2()" class="dropbtn">Add Watched</button>
+                    <div id="dropdown2" class="dropdown-content">
+                      <input type="text" placeholder="Search.." id="myInput2" onkeyup="filterFunction2()">
                       <a href="#startrektng">Star Trek: Next Generation</a>
                       <a href="#24">24</a>
                       <a href="#aos">Agents of SHIELD</a>
@@ -417,7 +440,7 @@
                 </section>
 
                 <section class="profilelist">
-                    <h3>Reading</h3>
+                    <span class="listtitle"><h3>Reading</h3></span>
                     <ol class="medialist">
                         <li>
                             <img src="img/hobbit300.jpg" alt="book image">
@@ -466,9 +489,9 @@
                         </li>
                     </ol>
                     <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn">Add Reading</button>
-                        <div id="dropdown4" class="dropdown-content">
-                          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                        <button onclick="myFunction3()" class="dropbtn">Add Reading</button>
+                        <div id="dropdown3" class="dropdown-content">
+                          <input type="text" placeholder="Search.." id="myInput3" onkeyup="filterFunction3()">
                           <a href="#hobbit">The Hobbit</a>
                           <a href="#whitefang">White Fang</a>
                           <a href="#greatgatsby">The Great Gatsby</a>
@@ -482,7 +505,7 @@
                     </section>
 
                     <section class="profilelist">
-                        <h3>Favorite Books</h3>
+                        <span class="listtitle"><h3>Favorite Books</h3></span>
                         <ol class="medialist">
                             <li>
                                 <img src="img/hobbit300.jpg" alt="book image">
@@ -531,9 +554,9 @@
                             </li>
                         </ol>
                         <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn">Add Favorite</button>
-                        <div id="dropdown5" class="dropdown-content">
-                          <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                        <button onclick="myFunction4()" class="dropbtn">Add Favorite</button>
+                        <div id="dropdown4" class="dropdown-content">
+                          <input type="text" placeholder="Search.." id="myInput4" onkeyup="filterFunction4()">
                           <a href="#hobbit">The Hobbit</a>
                           <a href="#whitefang">White Fang</a>
                           <a href="#greatgatsby">The Great Gatsby</a>
@@ -547,7 +570,7 @@
                         </section>
 
                         <section class="profilelist">
-                            <h3>Read</h3>
+                            <span class="listtitle"><h3>Read</h3></span>
                             <ol class="medialist">
                                 <li>
                                     <img src="img/hobbit300.jpg" alt="book image">
@@ -597,9 +620,9 @@
                             </ol>
 
                             <div class="dropdown">
-                            <button onclick="myFunction()" class="dropbtn">Add <br> Read</button>
-                            <div id="dropdown6" class="dropdown-content">
-                              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                            <button onclick="myFunction5()" class="dropbtn">Add <br> Read</button>
+                            <div id="dropdown5" class="dropdown-content">
+                              <input type="text" placeholder="Search.." id="myInput5" onkeyup="filterFunction5()">
                               <a href="#hobbit">The Hobbit</a>
                               <a href="#whitefang">White Fang</a>
                               <a href="#greatgatsby">The Great Gatsby</a>
@@ -617,14 +640,114 @@
 
     <script>
 function myFunction() {
+  document.getElementById("dropdown").classList.toggle("show");
+}
+
+function myFunction1() {
   document.getElementById("dropdown1").classList.toggle("show");
+}
+
+function myFunction2() {
+  document.getElementById("dropdown2").classList.toggle("show");
+}
+
+function myFunction3() {
+  document.getElementById("dropdown3").classList.toggle("show");
+}
+
+function myFunction4() {
+  document.getElementById("dropdown4").classList.toggle("show");
+}
+
+function myFunction5() {
+  document.getElementById("dropdown5").classList.toggle("show");
 }
 
 function filterFunction() {
   var input, filter, ul, li, a, i;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
+  div = document.getElementById("dropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+} 
+
+function filterFunction1() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
   div = document.getElementById("dropdown1");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+} 
+
+function filterFunction2() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdown2");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+} 
+
+function filterFunction3() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdown3");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+} 
+
+function filterFunction4() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput4");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdown4");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+} 
+
+function filterFunction5() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput5");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("dropdown5");
   a = div.getElementsByTagName("a");
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;

@@ -48,10 +48,26 @@
             max-width: 12%;
         }
 
-        h3{
-            font-family: acme;
-            margin: 20px 20px;
-            font-size: 5vw;
+        .listtitle{
+            margin: 0 0;
+            position: relative;
+            top: 0;
+            background:linear-gradient(to bottom, #599bb3 5%, #73a4ff 100%);
+	        background-color:#599bb3;
+            color: white;
+            max-width: 100%;
+            height: 10vw;
+            display: block;
+        }
+
+        .listtitle h3{
+            font-family: 'acme';
+            font-weight: lighter;
+            position: absolute;
+            margin-top: 2vw;
+            margin-bottom: 1vw;
+            margin-left: 1vw;
+            color: white;
         }
 
         .medialist{
@@ -67,7 +83,7 @@
             -moz-box-shadow: 0 4px 6px -6px #222;
             box-shadow: 0 4px 6px -6px #222;
             max-width: 100%;
-            
+            margin: 3vw auto;
         }
 
         .medialist img{
@@ -82,10 +98,11 @@
             list-style: none;
             font-family: 'arial';
             font-weight: lighter;
-            color: #9ea1a3;
-            font-size: 3.2vw;
+            color: #57595c;
+            font-size: 3.5vw;
             position: relative;
-            margin: 20px 20px;
+            top: 1vw;
+            margin: 0 2vw;
             text-align: left;
         }
 
@@ -98,7 +115,7 @@
             color: black;
             font-weight: bold;
             
-            margin: 20px 20px;
+            margin: 0 2vw;
             text-align: left;
         }
 
@@ -129,7 +146,7 @@
     <main>
 
  
-        <h3>Discovery</h3>
+        <span class="listtitle"><h3>Discovery</h3></span>
         <ol class="medialist">
             <a href="">
             <li>
@@ -159,6 +176,7 @@
                     </a>
                 </div>
                  <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
             </li>
         </a>
             
@@ -174,6 +192,7 @@
                     </a>
                 </div>
                  <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
             </li>
         </a>
 
@@ -189,6 +208,7 @@
                     </a>
                 </div>
                  <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
             </li>
         </a>
 
@@ -204,6 +224,7 @@
                     </a>
                 </div>
                  <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
             </li>
         </a>
         </ol>
