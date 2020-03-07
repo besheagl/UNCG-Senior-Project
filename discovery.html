@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Armchair Discovery</title>
+        <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+    </head>
+
+    <style>
+        body, ul, li, h2, a, a:visited{
+            margin: 0;
+            padding: 0;
+            font-family: arial;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body{
+            background-color: #e0e4e7;
+        }
+
+        header {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+        }
+
+        header .text,
+        header img{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        header .text{
+            font-family: 'Pacifico';
+	        font-size: 3vw;	
+	        text-shadow: 4px 2px #4ECDC7;
+	        color: black;
+	        letter-spacing: 2px;
+        }
+
+        header img{
+            max-width: 12%;
+        }
+
+        h3{
+            font-family: acme;
+            margin: 20px 20px;
+            font-size: 5vw;
+        }
+
+        .medialist{
+            list-style: none;
+            margin: 0 auto;
+            display: inline-block;
+            padding: 0;
+        }
+
+        .medialist li{
+            background-color: white;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+            max-width: 100%;
+            
+        }
+
+        .medialist img{
+            position: relative;
+            display: flex;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .medialist li .location{
+            list-style: none;
+            font-family: 'arial';
+            font-weight: lighter;
+            color: #9ea1a3;
+            font-size: 3.2vw;
+            position: relative;
+            margin: 20px 20px;
+            text-align: left;
+        }
+
+        .medialist li .post{
+            display: inline-block;
+            /*vertical-align: bottom;*/
+            font-size: 4vw;
+            position: relative;
+            right: 50;
+            color: black;
+            font-weight: bold;
+            
+            margin: 20px 20px;
+            text-align: left;
+        }
+
+        .medialist li .post p::after{
+            content: '...';
+        }
+
+         .medialist li .like{
+            color: white;
+            background-color: white;
+            border: none;
+            max-width: 8%;
+            margin: 10px 10px;
+         }
+
+    </style>
+
+
+    <body>
+    
+    <header>
+        <img src="web_hi_res_512.png" style="width:20%" alt="armchair logo">
+            <div class="text">
+                <h1>Armchair</h1>
+            </div>    
+    </header>
+
+    <main>
+
+ 
+        <h3>Discovery</h3>
+        <ol class="medialist">
+            <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+            </li>
+        </a>
+            
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+            </li>
+        </a>
+        </ol>
+          </div> 
+
+
+    </main>
+
+    </body>
+</html>
