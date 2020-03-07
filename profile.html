@@ -4,6 +4,7 @@
         <title>Armchair Profile</title>
         <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     </head>
 
     <style>
@@ -22,9 +23,9 @@
             position: sticky;
             top: 0;
             z-index: 1;
-            -webkit-box-shadow: 0 4px 6px -6px #222;
-            -moz-box-shadow: 0 4px 6px -6px #222;
-            box-shadow: 0 4px 6px -6px #222;
+            -webkit-box-shadow: 0 2vw 3vw -3vw #222;
+            -moz-box-shadow: 0 2vw 3vw -3vw #222;
+            box-shadow: 0 2vw 3vw -3vw #222;
         }
 
         header .text,
@@ -52,18 +53,21 @@
         }
 
         .profile-img{
-            width: 196px;
-            height: 196px;
+            width: 20vw;
+            height: 20vw;
             border-radius: 50%;
             background-position: center center;
             background-size: cover;
-            margin: 20px 20px;
+            margin-top: 5vw;
+            margin-left: 5vw;
         }
 
         .username {
             font-size: 3vw;
             font-family: 'arial';
             font-weight: bold;
+            position: relative;
+            right: 2vw;
         }
 
         .profilelist{
@@ -71,26 +75,32 @@
             font-size: 4vw;
             font-family: 'acme';
             color: #181717;
-            /*margin: 20px 20px;*/
-            -moz-box-shadow: 0 0 3px #ccc;
-            -webkit-box-shadow: 0 0 3px #ccc;
-            box-shadow: 0 0 3px #ccc;
+            margin: 2vw 2vw;
+            -moz-box-shadow: 0 0 1vw #ccc;
+            -webkit-box-shadow: 0 0 1vw #ccc;
+            box-shadow: 0 0 1vw #ccc;
         }
 
         .profilelist h3{
-            margin: 20px 20px;
+            margin: 2vw 2vw;
+            position: relative;
+            top: 6vw;
         }
 
         .medialist{
             list-style: none;
+            margin: 0 auto;
+            display: inline-block;
+            padding: 0;
         }
 
         .medialist li{
             margin: 30px 30px;
             background-color: white;
-            -webkit-box-shadow: 0 4px 6px -6px #222;
-            -moz-box-shadow: 0 4px 6px -6px #222;
-            box-shadow: 0 4px 6px -6px #222;
+            -webkit-box-shadow: 0 2vw 3vw -3vw #222;
+            -moz-box-shadow: 0 2vw 3vw -3vw #222;
+            box-shadow: 0 2vw 3vw -3vw #222;
+            max-width: 100%;
         }
 
         .medialist li .data{
@@ -110,8 +120,10 @@
 
         .medialist li .data .subdata{
             position: absolute;
-            color: #505050;
-            top: 5vw;
+            font-family: 'arial';
+            font-weight: lighter;
+            color: #9ea1a3;
+            top: 6vw;
         }
 
         .medialist li img{
