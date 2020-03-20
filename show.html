@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Armchair Discovery</title>
+        <link href="https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    </head>
+
+    <style>
+        body, ul, li, h2, a, a:visited{
+            margin: 0;
+            padding: 0;
+            font-family: arial;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body{
+            background-color: #e0e4e7;
+        }
+
+        header {
+            background-color: #93B7EF;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+            height: 20vw;
+        }
+
+        header { /*stylesheet*/
+            background-color: #93B7EF;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+            height: 20vw;
+        }
+
+        header .text, /*stylesheet*/
+        header img{
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        header .text{ /*stylesheet*/
+            font-family: 'Goudy Bookletter 1911', serif;
+            /*font-weight: bold;*/
+	        font-size: 4vw;	
+	        /*text-shadow: 2px 2px rgb(236, 201, 161);*/
+	        color: white;
+	        letter-spacing: 2px;
+        }
+
+        header img{ /*stylesheet*/
+            max-width: 20%;
+        }
+
+        header { /*stylesheet*/
+            background-color: #93B7EF;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+            height: 20vw;
+        }
+
+        header .text, /*stylesheet*/
+        header img{
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        header .text{ /*stylesheet*/
+            font-family: 'Goudy Bookletter 1911', serif;
+            /*font-weight: bold;*/
+	        font-size: 4vw;	
+	        /*text-shadow: 2px 2px rgb(236, 201, 161);*/
+	        color: white;
+	        letter-spacing: 2px;
+        }
+
+        header img{ /*stylesheet*/
+            max-width: 20%;
+        }
+
+        .dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropbtn {
+    border-radius: 20%;
+    background-color: #93B7EF;
+    /*background-color: #e0e4e7;*/
+    /*background:linear-gradient(to bottom, #e0e4e7 5%, #cacdcf 100%);*/
+    border: 0;
+}
+
+.dropbtn div {
+  width: 8vw;
+  height: .4vw;
+  background-color: white;
+  /*background-color: #595b5c;*/
+  margin: 1.6vw 0;
+  border-radius: 20%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #ff8878;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 6vw;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: 'Goudy Bookletter 1911', serif;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+        .listtitle{
+            margin: 0 0;
+            position: relative;
+            top: 0;
+            background:linear-gradient(to bottom, #ff8878 5%,#ebc192 100%);
+	        background-color:#ff8878;
+            color: white;
+            max-width: 100%;
+            height: 10vw;
+            display: block;
+        }
+
+        .listtitle h3{
+            font-family: 'Goudy Bookletter 1911', serif;;
+            font-weight: lighter;
+            position: absolute;
+            margin-top: 2vw;
+            margin-bottom: 1vw;
+            margin-left: 1vw;
+            color: white;
+        }
+
+        .medialist{
+            list-style: none;
+            margin: 0 auto;
+            display: inline-block;
+            padding: 0;
+        }
+
+        .medialist li{
+            background-color: #93B7EF;
+            -webkit-box-shadow: 0 4px 6px -6px #222;
+            -moz-box-shadow: 0 4px 6px -6px #222;
+            box-shadow: 0 4px 6px -6px #222;
+            max-width: 100%;
+            margin: 3vw auto;
+        }
+
+        .medialist img{
+            position: relative;
+            display: flex;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .medialist li .location{
+            list-style: none;
+            font-family: 'arial';
+            font-weight: lighter;
+            color: #f3d9bb;
+            font-size: 3.5vw;
+            position: relative;
+            top: 1vw;
+            margin: 0 2vw;
+            text-align: left;
+        }
+
+        .medialist li .post{
+            display: inline-block;
+            /*vertical-align: bottom;*/
+            font-size: 4vw;
+            position: relative;
+            right: 50;
+            color: black;
+            font-weight: bold;
+            margin: 0 2vw;
+            text-align: left;
+        }
+
+        .medialist li .post p::after{
+            content: '...';
+        }
+
+         .medialist li .like{
+            color: white;
+            background-color: #93B7EF;
+            border: none;
+            max-width: 8%;
+            margin: 10px 10px;
+         }
+
+    </style>
+
+
+    <body>
+    
+        <header>
+            <img src="web_hi_res_512.png" style="width:20%" alt="armchair logo">
+            <div class="text">
+                <h1>Armchair</h1>
+            </div>
+    
+            <div class="dropdown">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="home.html">Home</a>
+                    <a href="feed.html">My Feed</a>
+                    <a href="discovery.html">Discovery</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="">Log Out</a>
+                  </div>
+    
+                  <button class="dropbtn" onclick="openNav()"><div></div><div></div><div></div>
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+            </div>
+    
+        </header>
+
+    <main>
+        <p class="showinfo">
+            <h3>Show Title</h3>
+            <span>Director: <span class="director">director</span></span>
+            <span>Producers: <span class="producers">producers</span></span>
+            <span>Year: <span class="year">year</span></span>
+            <span>Description: <span class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod incidunt ab modi laudantium iste ex earum deserunt corporis unde? Quasi aliquid at ut culpa fugiat consectetur obcaecati neque recusandae ducimus!</span></span>
+            
+        </p>
+        <ol class="medialist">
+            <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+            
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+
+        <a href="">
+            <li>
+                <div class="data">
+                    <div class="location"><a href="" ><span class="title">Title</span><span>/</span><span class="part">Episode</span></a>
+                    <span>&nbsp;&middot;&nbsp;</span><a href=""><span class="username">Username</span></a></div>
+                    <a href="">
+                    <div class="post">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    </div>
+                    </a>
+                </div>
+                 <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
+                 <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+            </li>
+        </a>
+        </ol>
+          </div> 
+
+    </main>
+
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
+
+    </body>
+</html>
