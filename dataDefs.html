@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset ="utf-8"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<style>
+*{
+	box-sizing: border-box;
+}
+body {
+	max-width: 
+}
+.group {
+	display:float;
+	float:left;
+	margin: 0px 25px 50px 0px;
+	width: 350px;
+}
+td.pkey {
+	text-decoration: underline;
+}
+tr.fkey {
+	background-color: lightgray;
+}
+div.entry {
+	margin: 10px;
+}
+.entry tr{
+}
+.entry td {
+	border:1px solid black;
+	border-style:none none solid none;
+	padding:0px 0px 0px 5px;
+}
+.entry table{
+	font-family: "Lucida Console", Monaco, monospace;
+	width: 350px;
+}
+.entry table, td {
+	border-collapse: collapse;
+}
+.entry caption {
+	text-align: left;
+}
+</style>
+<body>
+	<h1>Data Dictionary</h1>
+	<span>Fields with a <span style = "background-color: lightgray;"> grey background</span> will return a foreign key, so use that key to get data for display (e.g. use isbn to get book title)
+	<!--<br>Fields with<span style = "color: grey;"> grey text </span> are not in the table but are included here to show how they are handled by get functions--></span><br>
+	<span>Show numbers for dbAccess functions reference: <input type = "checkbox" id = "numsToggle" onclick = "toggleNums()"></span><br>
+	<!-- <span>(getShow(56783214897, {1, 2}) would return the show title and year for show with id of 56783214897)</span><br> -->
+	<div class = "group">
+	<div class = "entry">
+		<table>
+			<caption>shows</caption>
+			<tr><td class = "pkey">showID</td><td>primary_key int11</td></tr>
+			<tr><td>title</td><td>string64</td></tr>
+			<tr><td>year</td><td>date</td></tr>
+			<tr><td>imgURL</td><td>string64</td></tr>
+			<tr><td>director</td><td>string64</td></tr>
+			<tr><td>producer</td><td>string64</td></tr>
+			<tr><td>description</td><td>string256</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>actors</caption>
+			<tr><td class = "pkey">acID</td><td>composite_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">showID</td><td>composite_key foreign_key int11</td></tr>
+			<tr><td>fName</td><td>string64</td></tr>
+			<tr><td>lName</td><td>string64</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>showComments</caption>
+			<tr><td class = "pkey">cmID</td><td>composite_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">showID</td><td>composite_key foreign_key int11</td></tr>
+			<tr><td>poster</td><td>foreign key string64</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+			<tr><td>body</td><td>string1024</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>episodes</caption>
+			<tr><td class = "pkey">epTitle</td><td>composite_key string64</td></tr>
+			<tr class = "fkey"><td class = "pkey">showID</td><td>composite_key foreign_key int11</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+			<tr><td>network</td><td>string64</td></tr>
+			<tr><td>description</td><td>string256</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>epComments</caption>
+			<tr><td class = "pkey">cmID</td><td>composite_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">epTitle</td><td>composite_key foreign_key string64</td></tr>
+			<tr class = "fkey"><td class = "pkey">showID</td><td>composite_key foreign_key int11</td></tr>
+			<tr class = "fkey"><td>poster</td><td>foreign_key string64</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+			<tr><td>body</td><td>string1024</td></tr>
+		</table><br>
+	</div>
+	</div>
+	
+	<div class = "group">
+	<div class = "entry">
+		<table>
+			<caption>books</caption>
+			<tr><td class = "pkey">isbn</td><td>primary_key bigint13</td></tr>
+			<tr><td>title</td><td>string64</td></tr>
+			<tr><td>year</td><td>date</td></tr>
+			<tr><td>author</td><td>string64</td></tr>
+			<tr><td>publisher</td><td>string64</td></tr>
+			<tr><td>description</td><td>string256</td></tr>
+			<tr><td>imgURL</td><td>string64</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>bookComments</caption>
+			<tr><td class = "pkey">cmID</td><td>composite_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">isbn</td><td>composite_key foreign_key bigint13</td></tr>
+			<tr class = "fkey"><td>poster</td><td>foreign key string64</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+			<tr><td>body</td><td>string1024</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>chapters</caption>
+			<tr><td class = "pkey">chTitle</td><td>composite_key string64</td></tr>
+			<tr class = "fkey"><td class = "pkey">isbn</td><td>composite_key foreign_key bigint13</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>chComments</caption>
+			<tr><td class = "pkey">cmID</td><td>composite_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">chTitle</td><td>composite_key foreign_key string64</td></tr>
+			<tr class = "fkey"><td class = "pkey">isbn</td><td>composite_key foreign_key bigint13</td></tr>
+			<tr><td>poster</td><td>foreign_key string64</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+			<tr><td>body</td><td>string1024</td></tr>
+		</table><br>
+	</div>
+	</div>
+	
+	<div class = "group">
+	<div class = "entry">
+		<table>
+			<caption>likes</caption>
+			<tr class = "fkey"><td class = "pkey">cmRef</td><td>foreign_key int11</td></tr>
+			<tr class = "fkey"><td class = "pkey">username</td><td>foreign_key string64</td></tr>
+			<tr><td>date</td><td>date</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>accounts</caption>
+			<tr><td class = "pkey">username</td><td>primary_key string64</td></tr>
+			<tr><td>password</td><td>string64</td></tr>
+			<tr><td>options</td><td>string64</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>allComments</caption>
+			<tr><td class = "pkey">cmRef</td><td>primary_key int11</td></tr>
+			<tr><td>type</td><td>string4</td></tr>
+			<tr class = "fkey"><td class = "pkey">cmID</td><td>foreign_key int11</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>watchedList</caption>
+			<tr class = "fkey"><td >username</td><td>composite_key foreign_key string64</td></tr>
+			<tr class = "fkey"><td>showID</td><td>composite_key foreign_key int11</td></tr>
+			<tr class = "fkey"><td>epTitle</td><td>composite_key foreign_key string64</td></tr>
+		</table><br>
+	</div>
+	<div class = "entry">
+		<table>
+			<caption>readList</caption>
+			<tr class = "fkey"><td >username</td><td>composite_key foreign_key string64</td></tr>
+			<tr class = "fkey"><td>isbn</td><td>composite_key foreign_key bigint13</td></tr>
+			<tr class = "fkey"><td>chTitle</td><td>composite_key foreign_key string64</td></tr>
+		</table><br>
+	</div>
+	</div>
+	
+</body>
+<script>
+var tables = document.getElementsByClassName("entry");
+for (i = 0; i < tables.length; i++){
+	var rows = tables[i].getElementsByTagName("tr");
+	for (j = 0; j < rows.length; j++){
+		rows[j].innerHTML = "<td class = 'num' style = 'display: none;'>" + j + " </td>" + rows[j].innerHTML;
+	}
+}
+function toggleNums() {
+	var checkB = document.getElementById("numsToggle");
+	var rows = document.getElementsByClassName("num");
+	for (i = 0; i < rows.length; i++){
+		if (checkB.checked == true) {
+			rows[i].style.display = "";
+		} else {
+			rows[i].style.display = "none";
+		}
+	}
+}
+</script>
+</html>

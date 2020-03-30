@@ -106,6 +106,13 @@
 
 
     <body>
+
+        <?php
+            require 'dbAccess.php';	//uses dbAccess.php library
+            $showID = htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
+            $info = getEpInfo($con, $showID);	//gets show info using the showID via dbAccess.php lib
+            $comments = getEpComments($con, $showID);
+        ?>
     
         <header>
             <img src="web_hi_res_512.png" style="width:20%" alt="armchair logo">
@@ -132,7 +139,7 @@
     <main>
 
         <div class="showinfo">
-            <h3>Episode Title</h3>
+            <h3><?php echo $info[1]; //write title?></h3>
             <span class="field">Network: </span><span class="director">network</span>
             <br>
             <span class="field">Date: </span><span class="producers">date</span>
@@ -220,7 +227,6 @@
 
     </main>
 
-
     <script>
         function openNav() {
           document.getElementById("mySidenav").style.width = "250px";
@@ -232,4 +238,5 @@
         </script>
 
     </body>
+    
 </html>

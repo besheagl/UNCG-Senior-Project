@@ -1,0 +1,223 @@
+<?php
+// Include config file
+require_once "config.php";
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM users WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "This username is already taken.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Validate password
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";     
+    } elseif(strlen(trim($_POST["password"])) < 6){
+        $password_err = "Password must have atleast 6 characters.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm password.";     
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            
+            // Set parameters
+            $param_username = $username;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("location: login.php");
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($link);
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up</title>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<style>
+
+h1 {
+	display: inline-block;
+    font-family: 'Pacifico';
+	font-size: 7vw;	
+	text-shadow: 4px 2px #4ECDC7;
+	color: black;
+	letter-spacing: 2px;
+	margin-left: 1vw;
+}
+h2 {
+    font-family: 'Acme';
+	font-size: 5vw;
+	color: #4ECDC7;
+	letter-spacing: 2px;
+}
+h3 {
+	font-family: 'Acme';
+	font-size: 5vw;
+	letter-spacing: 2px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1px 1px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button1 {
+	box-shadow: 0px 11px 12px 1px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #73ecff 100%);
+	background-color:#599bb3;
+	border-radius:22px;
+	display:block;
+	font-style: bold;
+	color:#ffffff;
+	font-family: 'Pacifico';
+	font-size:6vw;
+	margin: 0 auto;
+	margin-top: 8%;
+	margin-bottom: 8%;
+	padding:5px 5px;
+	text-decoration:none;
+	text-shadow:0px 2px 3px #3d768a;
+	width: 70vw;
+}
+.button1:active {
+	position:relative;
+	top:1px;
+}
+
+.cancelbtn {
+  background:linear-gradient(to bottom, #9A3329 5%, #E9756A 100%);
+  border-radius:22px;
+  box-shadow: 0px 11px 12px 1px #276873;
+  color:#ffffff;
+  font-family: 'Acme';
+  font-size:6vw;
+  margin: 0 auto;
+  margin-bottom: 10%;
+  padding:5px 5px;
+  text-decoration:none;
+  text-shadow:0px 2px 3px #3d768a;
+  width: 30vw;
+}
+
+
+span.psw{
+  float: right;
+  font-family: 'Acme';
+  font-size: 5vw;
+  margin-right: 5%;
+  padding-top: 5%;
+}
+
+
+</style>
+</head>
+<!-- This line defines the default zoom for mobile devices. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<body>
+<img src="logo.png" style="width:20%; margin-left: 5%; margin-top: 10%;">
+<h1>Sign Up for Armchair!</h1>
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+  <div>
+    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+				<label><h2>Create a username</h2></label>
+				<input type="text" name="username"  class="form-control" value="<?php echo $username; ?>">
+				<span class="help-block"><?php echo $username_err; ?></span>
+	</div>
+	
+    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label><h2>Password</h2></label>
+                <input type="password" name="password"  class="form-control" value="<?php echo $password; ?>">
+                <span class="help-block"><?php echo $password_err; ?></span>
+    </div>
+	
+    <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <label><h2>Confirm Password</h2></label>
+                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+    </div>
+			
+    <div class="form-group">
+                <input type="submit" class="button1" value="Create Account">
+    </div>
+    
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button href="home.html" type="button" href="home.html" class="cancelbtn">Cancel</button>
+  </div>
+</form>
+
+</body>
+</html>
