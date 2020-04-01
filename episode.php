@@ -109,9 +109,10 @@
 
         <?php
             require 'dbAccess.php';	//uses dbAccess.php library
-            $showID = htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
-            $info = getEpInfo($con, $showID);	//gets show info using the showID via dbAccess.php lib
-            $comments = getEpComments($con, $showID);
+            $showID = 1;//htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
+            $info = getEpInfo($con, $showID, "Remembrance");	//gets show info using the showID via dbAccess.php lib
+            $comments = getEpComments($con, $showID, "Remembrance");
+
         ?>
     
         <header>
@@ -139,88 +140,31 @@
     <main>
 
         <div class="showinfo">
-            <h3><?php echo $info[1]; //write title?></h3>
-            <span class="field">Network: </span><span class="director">network</span>
+            <h3><?php echo $info[0]; //write title?></h3>
+            <span class="field">Network: </span><span class="director"><?php echo $info[3];?></span>
             <br>
-            <span class="field">Date: </span><span class="producers">date</span>
+            <span class="field">Date: </span><span class="producers"><?php echo $info[2];?></span>
             <br>
-            <span class="field">Description: </span><span class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod incidunt ab modi laudantium iste ex earum deserunt corporis unde? Quasi aliquid at ut culpa fugiat consectetur obcaecati neque recusandae ducimus!</span>         
+            <span class="field">Description: </span><span class="description"><?php echo $info[4];?></span>         
         </div>
         <ol class="medialist">
+            <?php foreach ($comments as $retval=>$defaultfields) { ?>
             <a href="">
                 <li>
                     <div class="data">
-                        <div class="location"><a href="" ><span class="title">Episode Title</span></a>
+                        <div class="location"><a href="" ><span class="username"><?php echo $defaultfields[3]; ?></span></a>
                         <a href="">
                         <div class="post">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum delectus porro iste illo nisi aspernatur minima quod quam architecto? Rerum dolorum molestiae quos fugiat numquam veritatis iusto, iure alias ratione?</p>
+                            <p><?php echo $defaultfields[5]; ?></p>
                         </div>
                         </a>
                     </div>
                     <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
                     <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
                 </li>
-            </a>
+            </a> <?php } ?>
 
-            <a href="">
-                <li>
-                    <div class="data">
-                        <div class="location"><a href="" ><span class="title">Episode Title</span></a>
-                        <a href="">
-                        <div class="post">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quia eveniet suscipit a illum earum iste recusandae vitae commodi ipsam natus, quisquam aliquam vero sed exercitationem quidem eum sint placeat.</p>
-                        </div>
-                        </a>
-                    </div>
-                    <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
-                    <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
-                </li>
-            </a>
-
-            <a href="">
-                <li>
-                    <div class="data">
-                        <div class="location"><a href="" ><span class="title">Episode Title</span></a>
-                        <a href="">
-                        <div class="post">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium voluptates in quaerat debitis optio dolorum et, ducimus neque quo quas molestias deserunt quia totam, non obcaecati ut ad, perferendis ex.</p>
-                        </div>
-                        </a>
-                    </div>
-                    <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
-                    <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
-                </li>
-            </a>
-
-            <a href="">
-                <li>
-                    <div class="data">
-                        <div class="location"><a href="" ><span class="title">Episode Title</span></a>
-                        <a href="">
-                        <div class="post">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim in nihil voluptatum. Amet assumenda omnis corrupti fugit distinctio ratione iure, praesentium sint rerum tempora eius dolor, repellendus quidem modi perferendis?</p>
-                        </div>
-                        </a>
-                    </div>
-                    <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
-                    <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
-                </li>
-            </a>
-
-            <a href="">
-                <li>
-                    <div class="data">
-                        <div class="location"><a href="" ><span class="title">Episode Title</span></a>
-                        <a href="">
-                        <div class="post">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique maiores, quam distinctio excepturi voluptatem velit. Velit, id saepe minus eius itaque obcaecati. Esse amet porro, dolor minus natus at corporis?</p>
-                        </div>
-                        </a>
-                    </div>
-                    <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
-                    <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
-                </li>
-            </a>
+            
 
         </ol>
           </div> 
