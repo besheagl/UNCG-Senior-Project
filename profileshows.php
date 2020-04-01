@@ -10,6 +10,13 @@
     </head>
 
     <body>
+
+        <?php
+        require 'dbAccess.php';	//uses dbAccess.php library
+        $showID = 1;//htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
+        $info = getShowInfo($con, $showID);	//gets show info using the showID via dbAccess.php lib
+        $username = "besheagl";
+    ?>
     <header>
         <img src="web_hi_res_512.png" style="width:20%" alt="armchair logo">
             <div class="text">
@@ -35,7 +42,7 @@
     <section class="user">
         <div class="profile-img" style="background-image: url('//via.placeholder.com/350x250');"></div>
         <div class="profileusername">
-            <span class="profileusername">Username</span>
+            <span class="profileusername"><?php echo $username ?></span>
         </div>
         <span class="switch"><a href="profilebooks.html">Switch to Books</a></span>
     </section>
@@ -44,6 +51,7 @@
         <section class="profilelist">
         <span class="listtitle"><h3>Watching</h3></span>
         <ol class="profilemedialist">
+        <?php foreach () { ?> <!-- this will be completed once Ian finishes the database -->
             <li>
                 <img src="img/startrektng.jpg" alt="tv show image">
                 <div class="data">

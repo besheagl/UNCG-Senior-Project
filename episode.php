@@ -163,11 +163,8 @@
                     <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
                 </li>
             </a> <?php } ?>
-
-            
-
         </ol>
-          </div> 
+        </div> 
 
     </main>
 
