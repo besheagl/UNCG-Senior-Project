@@ -12,14 +12,25 @@
                 font-size: 3.5vw;
                 font-family: Verdana, Geneva, sans-serif;
                 margin: 0 2vw;
+                color: #141414;
+             }
+
+             .infopiece{
+                margin: 1vw auto;
+                display: inline-block;
              }
 
              .showinfo h3{
-                font-weight: bold;
+                margin: 1vw auto;
              }
 
              .showinfo .field{
                 font-weight: bold;
+             }
+
+             .threadlist{
+                position: relative;
+                top: 2vw;
              }
 
             .listtitle{
@@ -41,69 +52,46 @@
                 margin-top: 2vw;
                 margin-bottom: 1vw;
                 margin-left: 1vw;
+                width: 100%;
+                text-align: center;
                 color: white;
             }
     
             .medialist{
                 list-style: none;
                 margin: 0 auto;
-                display: inline-block;
+                display: block;
                 padding: 0;
             }
     
-            .medialist li{
+            li {
                 background-color: #93B7EF;
                 -webkit-box-shadow: 0 4px 6px -6px #222;
                 -moz-box-shadow: 0 4px 6px -6px #222;
                 box-shadow: 0 4px 6px -6px #222;
                 max-width: 100%;
-                margin: 3vw auto;
-                font-family: 'Arial';
-            }
-    
-            .medialist img{
-                position: relative;
-                display: flex;
-                max-width: 100%;
+                height: 10vw;
                 margin: 0 auto;
-                text-align: center;
-            }
-    
-            .medialist li .location{
-                list-style: none;
-                font-family: 'arial';
+                position: relative;
+                font-family: 'Arial';
                 font-weight: lighter;
-                color: #f3d9bb;
-                font-size: 3.5vw;
-                position: relative;
-                top: 1vw;
-                margin: 0 2vw;
-                text-align: left;
-            }
-    
-            .medialist li .post{
-                display: inline-block;
-                /*vertical-align: bottom;*/
-                font-size: 4vw;
-                position: relative;
-                right: 50;
-                color: black;
-                font-weight: bold;
-                margin: 0 2vw;
-                text-align: left;
-            }
-    
-            .medialist li .post p::after{
-                content: '...';
-            }
-    
-             .medialist li .like{
                 color: white;
-                background-color: #93B7EF;
-                border: none;
-                max-width: 8%;
-                margin: 10px 10px;
-             }
+                font-size: 3.5vw;
+                text-align: center;
+                border-style: solid;
+                border-color: #87a4d3;
+                border-top: none;
+                border-width: .25px;
+            }
+
+            .location {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
         </style>
 
     </head>
@@ -115,7 +103,7 @@
         require 'dbAccess.php';	//uses dbAccess.php library
         $showID = 1;//htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
         $info = getShowInfo($con, $showID);	//gets show info using the showID via dbAccess.php lib
-        $epsList = getEpsList($con, $showID);
+        $epsList = getEpsListByDate($con, $showID);
         $epInfo = getEpInfo($con, $showID, "Remembrance");	//gets show info using the showID via dbAccess.php lib
     ?>
 
@@ -145,14 +133,25 @@
 
         <div class="showinfo">
             <h3><?php echo $info[1]; //write title?></h3>
+            <span class="infopiece">
             <span class="field">Director: </span><span class="director"><?php echo $info[3]; ?></span>
+            </span>
             <br>
+            <span class="infopiece">
             <span class="field">Producers: </span><span class="producers"><?php echo $info[4]; ?></span>
+            </span>
             <br>
+            <span class="infopiece">
             <span class="field">Date: </span><span class="year"><?php echo $info[2]; ?></span>
+            </span>
             <br>
-            <span class="field">Description: </span><span class="description"><?php echo $info[5]; ?></span>         
+            <span class="infopiece">
+            <span class="field">Description: </span><span class="description"><?php echo $info[5]; ?></span> 
+            </span>        
         </div>
+
+        <div class="threadlist">
+        <span class="listtitle"><h3>Episode Threads</h3></span>
         <ol class="medialist">
         <?php foreach ($epsList as $retval) { ?>
             <?php
@@ -160,16 +159,13 @@
                 ?>
             <a href="">
                 <li>
-                    <div class="data">
-                        <div class="location"><a href="" ><span class="title"><?php echo $info[1]; //write title?></span></a>
-                    </div>
-                    <a href="img/startrektng.png"><img src="img/startrektng.png" alt="tv show image"></a>
-                    <button href="" class="like"><img src="img/heart.png" alt="Like button, in shape of a heart"></div>
+                        <div class="location">
+                            <a href="" ><span class="title"><?php echo $epInfo[0]; //write title?></span></a>
+                        </div>
                 </li>
             </a> <?php } ?>
         </ol>
-        </div> 
-
+        <div class="threadlist">
     </main>
 
 

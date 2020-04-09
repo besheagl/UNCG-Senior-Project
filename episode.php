@@ -147,6 +147,7 @@
             <br>
             <span class="field">Description: </span><span class="description"><?php echo $info[4];?></span>         
         </div>
+
         <ol class="medialist">
             <?php foreach ($comments as $retval=>$defaultfields) { ?>
             <a href="">
@@ -164,7 +165,9 @@
                 </li>
             </a> <?php } ?>
         </ol>
-        </div> 
+        </div>
+        
+
 
     </main>
 

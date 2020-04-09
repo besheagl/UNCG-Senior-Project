@@ -7,35 +7,38 @@
         <link rel="stylesheet" href="stylesheet.css"> <!--stylesheet for styles that apply to many of the pages-->
         
         <style> /*style specifically for Discovery*/
-            .listtitle{
-                margin: 0 0;
-                position: relative;
-                top: 0;
-                background:linear-gradient(to bottom, #ff8878 5%,#ebc192 100%);
-                background-color:#ff8878;
-                color: white;
-                max-width: 100%;
-                height: 10vw;
-                display: block;
-            }
+
+                  /*Styling peach "Discovery" banner*/
+                  .listtitle{
+                    margin: 0 0;
+                    position: relative;
+                    top: 0;
+                    background:linear-gradient(to bottom, #ff8878 5%,#ebc192 100%);
+                    background-color:#ff8878;
+                    color: white;
+                    max-width: 100%;
+                    height: 10vw;
+                    display: block;
+                }
+        
+                .listtitle h3{
+                    font-family: 'Goudy Bookletter 1911', serif;;
+                    font-weight: lighter;
+                    position: absolute;
+                    margin-top: 2vw;
+                    margin-bottom: 1vw;
+                    margin-left: 1vw;
+                    color: white;
+                }
     
-            .listtitle h3{
-                font-family: 'Goudy Bookletter 1911', serif;;
-                font-weight: lighter;
-                position: absolute;
-                margin-top: 2vw;
-                margin-bottom: 1vw;
-                margin-left: 1vw;
-                color: white;
-            }
-    
+        /*Styling list of posts*/
             .medialist{
                 list-style: none;
                 margin: 0 auto;
                 display: inline-block;
                 padding: 0;
             }
-    
+            
             .medialist li{
                 background-color: #93B7EF;
                 -webkit-box-shadow: 0 4px 6px -6px #222;
@@ -54,7 +57,7 @@
                 text-align: center;
             }
     
-            .medialist li .location{
+            .medialist .location{
                 list-style: none;
                 font-family: 'arial';
                 font-weight: lighter;
@@ -66,7 +69,7 @@
                 text-align: left;
             }
     
-            .medialist li .post{
+            .medialist .post{
                 display: inline-block;
                 /*vertical-align: bottom;*/
                 font-size: 4vw;
@@ -78,11 +81,11 @@
                 text-align: left;
             }
     
-            .medialist li .post p::after{
+            .medialist .post p::after{
                 content: '...';
             }
     
-             .medialist li .like{
+             .medialist .like{
                 color: white;
                 background-color: #93B7EF;
                 border: none;
@@ -151,6 +154,8 @@
 
         </ol>
           </div> 
+        
+        
 
     </main>
 

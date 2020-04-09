@@ -1,16 +1,5 @@
 <?php
-//	connection info
-$sname = 	"localhost";
-$uname = 	"id12568920_armchairadmin";
-$password = 	"Csc218armchaiR";
-$database = 	"id12568920_armchair";
-
-$con = mysqli_connect($sname, $uname, $password, $database);
-if (!$con) {
-	die("failed to connect: " . mysqli_connect_error());
-} else {
-//	echo "did it";
-}
+require 'connect.php';
 
 //	shows
 function getShows($con, $prj) {
@@ -65,7 +54,7 @@ function getShowsList($con, $a, $b) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No shows found in database");
 	}
 }
 
@@ -85,6 +74,7 @@ function getShowInfo($con, $showID) {
 	}
 }
 
+/*
 function getShowComments($con, $showID) {
 	$retval = array();
 	$defaultFields = array("cmID", "showID", "poster", "date", "body");
@@ -100,9 +90,10 @@ function getShowComments($con, $showID) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No comments found for show in database");
 	}
 }
+*/
 
 function getEpsList($con, $showID) {
 	$retval = array();
@@ -116,7 +107,24 @@ function getEpsList($con, $showID) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database for given showID");
+		trigger_error("No episodes for given showID");
+	}
+}
+
+function getEpsListByDate($con, $showID) {
+	$retval = array();
+	$sqlstr = "SELECT epTitle FROM `episodes`";
+	$sqlstr .= "\n WHERE showID=" . $showID;
+	$sqlstr .= "\n ORDER BY `episodes`.`date` ASC;";
+	//$sqlstr .= "\n LIMIT " . $a . "," . $b;
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		while ($row = $rows->fetch_assoc()) {
+			array_push($retval, $row["epTitle"]);
+		}
+		return $retval;
+	} else {
+		trigger_error("No episodes for given showID");
 	}
 }
 
@@ -151,7 +159,7 @@ function getEpComments($con, $showID, $epTitle) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No ep comments database");
 	}
 }
 
@@ -171,7 +179,7 @@ function getActorsByShow($con, $showID) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database for given showID");
+		trigger_error("No actors in database for given showID");
 	}
 }
 
@@ -186,7 +194,7 @@ function getBooksList($con, $a, $b) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No books in database");
 	}
 }
 
@@ -207,6 +215,7 @@ function getBookInfo($con, $isbn) {
 	}
 }
 
+/*
 function getBookComments($con, $isbn) {
 	$retval = array();
 	$defaultFields = array("cmID", "isbn", "poster", "date", "body");
@@ -225,6 +234,7 @@ function getBookComments($con, $isbn) {
 		trigger_error("Nothing in database");
 	}
 }
+*/
 
 function getChsList($con, $isbn) {
 	$retval = array();
@@ -237,7 +247,7 @@ function getChsList($con, $isbn) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database for given isbn");
+		trigger_error("No chapters in database for given isbn");
 	}
 }
 
@@ -256,7 +266,7 @@ function getChComments($con, $isbn, $chTitle) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No comments for chapter in database");
 	}
 }
 
@@ -275,14 +285,88 @@ function getAllComments($con, $a, $b) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		trigger_error("No comments in database");
+	}
+}
+
+function getCommentInfo($con, $cmRef) {
+	$retval = array();
+	$sqlstr = "SELECT type, cmID FROM `allComments`";
+	$sqlstr .= "\n WHERE cmRef=" . $cmRef . ";";
+	$rows = $con->query($sqlstr);
+	$type = "";
+	$cmID = "";
+	if ($rows->num_rows > 0){
+		while ($row = $rows->fetch_assoc()) {
+			$type = $row["type"];
+			$cmID = $row["cmID"];
+			array_push($retval, $type);
+			array_push($retval, $cmID);
+		}
+		if ($type == "show") {
+			$sqlStr = "SELECT * FROM `showComments`";
+			$sqlStr .= "\nWHERE cmID=" . $cmID . ";";
+			$qrows = $con->query($sqlStr);
+			while ($qrow = $qrows->fetch_assoc()) {
+				array_push($retval, $qrow["showID"]);
+				array_push($retval, NULL);
+				array_push($retval, $qrow["poster"]);
+				array_push($retval, $qrow["date"]);
+				array_push($retval, $qrow["body"]);
+			}
+		} else if ($type == "ep") {
+			$sqlStr = "SELECT showID, epTitle, poster, date, body FROM `epComments`";
+			$sqlStr .= "\nWHERE cmID=" . $cmID . ";";
+			$rows = $con->query($sqlStr);
+			while ($row = $rows->fetch_assoc()) {
+				array_push($retval, $row["showID"]);
+				array_push($retval, $row["epTitle"]);
+				array_push($retval, $row["poster"]);
+				array_push($retval, $row["date"]);
+				array_push($retval, $row["body"]);
+			}
+		} else if ($type == "book") {
+			$sqlStr = "SELECT isbn, poster, date, body FROM `bookComments`";
+			$sqlStr .= "\nWHERE cmID=" . $cmID . ";";
+			$rows = $con->query($sqlStr);
+			while ($row = $rows->fetch_assoc()) {
+				array_push($retval, $row["isbn"]);
+				array_push($retval, NULL);
+				array_push($retval, $row["poster"]);
+				array_push($retval, $row["date"]);
+				array_push($retval, $row["body"]);
+			}
+		} else if ($type == "ch") {
+			$sqlStr = "SELECT isbn, chTitle, poster, date, body FROM `chComments`";
+			$sqlStr .= "\nWHERE cmID=" . $cmID . ";";
+			$rows = $con->query($sqlStr);
+			while ($row = $rows->fetch_assoc()) {
+				array_push($retval, $row["isbn"]);
+				array_push($retval, $row["chTitle"]);
+				array_push($retval, $row["poster"]);
+				array_push($retval, $row["date"]);
+				array_push($retval, $row["body"]);
+			}
+		}
+		return $retval;
+	} else {
+		trigger_error("Nothing in database for given cmRef");
 	}
 }
 
 function getCommentsByUser($con, $username) {
 	$retval = array();
 	$defaultFields = array("cmRef", "type", "cmID");
-	$sqlstr = "SELECT * FROM `chComments` LEFT JOIN `allComments` ON allComments.cmID = chComments.cmID WHERE allComments.type = 'ch';";
+	
+	$sqlstr = "SELECT U.cmRef, U.type, U.cmID, U.poster FROM(";
+	$sqlstr.= "SELECT allComments.cmRef, allComments.type, allComments.cmID, chComments.poster FROM `chComments` LEFT JOIN `allComments` ";
+	$sqlstr.= "ON allComments.cmID = chComments.cmID ";
+	$sqlstr.= "WHERE allComments.type = 'ch' ";
+	$sqlstr.= "UNION SELECT allComments.cmRef, allComments.type, allComments.cmID, epComments.poster FROM `epComments` LEFT JOIN `allComments` ";
+	$sqlstr.= "ON allComments.cmID = epComments.cmID ";
+	$sqlstr.= "WHERE allComments.type = 'ep') AS U ";
+	$sqlstr.= "WHERE U.poster = '" . $username ."';";
+	//echo "\n" . $sqlstr . "\n";	//debug
 	$rows = $con->query($sqlstr);
 	if ($rows->num_rows > 0){
 		while ($row = $rows->fetch_assoc()) {
@@ -294,8 +378,33 @@ function getCommentsByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing in database");
+		$retval = array(array("no", "comments"), array("for", "user"));
+		return $retval;
+		trigger_error("No comments by user in database");
 	}
+}
+
+function getWatchedByUser($con, $username) { //by Brianna, can be removed if needed
+	$retval = array();
+	$defaultFields = array("showID"); //'watchedList' WHERE watchedList.username = username
+	$sqlstr = "SELECT * FROM 'watchedList' ON watchedList.username = " . $username .";";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		while ($row = $rows->fetch_assoc()) {
+			$record = array();
+			for ($i=0; $i<count($defaultFields); $i++) {
+				array_push($record, $row[$defaultFields[$i]]);
+			}
+			array_push($retval, $record);
+		}
+		return $retval;
+	} else {
+		trigger_error("Nothing watched by user in database");
+	}
+}
+
+function addComment($con, $type, $user, $show, $episode, $body){
+	
 }
 
 function makeTable($input) {
@@ -313,24 +422,4 @@ function makeTable($input) {
 function dummy() {
 	echo "ur dum";
 }
-
-// All of these should work i think
-
-//echo getShowInfo($con, getShowsList($con, 0, 1)[0])[1];
-//makeTable(getShows($con, array(2,1,2)));
-//echo getEpInfo($con, 1, getEpsList($con, 1)[0])[0];
-//echo getBookInfo($con, getBooksList($con, 0, 1)[0])[1];
-//echo getChsList($con, getBooksList($con, 0, 100)[0])[0];
-//makeTable(getBookComments($con, getBooksList($con, 0, 100)[0]));
-//makeTable(getAllComments($con, 0, 100));
-makeTable(getCommentsByUser($con,"armchairapp@outlook.com"));
-/*
-$showEx = getShowsList($con, 0, 100)[0];
-makeTable(getEpComments($con, $showEx, getEpsList($con, $showEx)[0]));
-*/
-/*
-$bookEx = getBooksList($con, 0, 100)[0];
-makeTable(getChComments($con, $bookEx, getChsList($con, $bookEx)[0]));
-*/
-//makeTable(getActorsByShow($con, 1));
 ?>

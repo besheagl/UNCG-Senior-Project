@@ -274,8 +274,8 @@ header img{ /*stylesheet*/
                       text-decoration:none;
                       width: 5vw;
                       height: 5vw;
-                      position: relative;
-                      top: .5%;
+                      /*position: relative; /*I think this is why the addcmtbtn couldn't be seen*/
+                      /*top: .5%;*/
                       margin-bottom: 5vw;
                       left: 3vw;
                   }
