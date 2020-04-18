@@ -1,0 +1,15 @@
+<?php
+   include('connect.php');
+   session_start();
+   
+   // Storing Session
+$user_check=$_SESSION['login_username'];
+// SQL Query To Fetch Complete Information Of User
+$ses_sql=mysql_query("select username from accounts where username='$login_username'", $con);
+$row = mysql_fetch_assoc($ses_sql);
+$login_session =$row['username'];
+if(!isset($login_session)){
+mysql_close($con); // Closing Connection
+header('Location: login.html'); // Redirecting To try again
+}
+?>
