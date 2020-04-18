@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset ="utf-8"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>front end pages documentation</title>
+</head>
+<style>
+*{
+	box-sizing: border-box;
+}
+body {
+	max-width: 
+	padding: 25px;
+	margin: 25px;
+}
+.group {
+	display:float;
+	float:left;
+	margin: 0px 25px 50px 0px;
+}
+td.pkey {
+	text-decoration: underline;
+}
+tr.fkey {
+	background-color: lightgray;
+}
+div.entry {
+	margin: 10px;
+}
+.entry tr{
+}
+.entry td {
+	border:1px solid black;
+	border-style:none none solid none;
+	padding:0px 0px 0px 5px;
+}
+.entry table{
+	font-family: "Lucida Console", Monaco, monospace;
+	width: 350px;
+}
+.entry table, td {
+	border-collapse: collapse;
+}
+.entry caption {
+	text-align: left;
+}
+code {
+	display: block;
+	font-family: "Lucida Console", Monaco, monospace;
+	background-color: lightgray;
+	box-sizing: border-box;
+	padding: 10px;
+}
+ul.soon{
+	color: gray;
+}
+</style>
+<body>
+	<h1>Front End Pages</h1>
+	<div class = "group">
+		<h3>Profile Related</h3>
+		<ul>
+		<li><strong>addshow.php</strong> uses stylesheet.css, dbAccess.php (addWatched()), addShowToWatched.php</li>
+			<ul>
+                <li>an interface for user to add a show to a list (eg, "Watched") on their profile</li>
+                <li>linked to by plus buttons on profileshows.php</li>
+                <li>adds selected show to watchedList table in database</li>
+			</ul>
+        </ul>
+        <ul>
+		<li><strong>profilebooks.php</strong> uses stylesheet.css, dbAccess.php (getReadByUser, getReadingByUser, 
+			getFavoriteBooksByUser, getBookInfo)</li>
+			<ul>
+                <li>a view of user's profile, where user's book lists can be seen</li>
+                <li>user can update lists using plus buttons</li>
+				<li>linked to an addbook.php file from plus buttons</li>
+				<li>displays elements from readList, readingList, and favoriteBooksList tables</li>
+				<li>will soon truncate titles and authors to fit in the list elements</li>
+			</ul>
+        </ul>
+        <ul>
+		<li><strong>profileshows.php</strong> uses stylesheet.css, dbAccess.php (getShowInfo, getEpsListByDate, getEpInfo)</li>
+			<ul>
+                <li>a view of user's profile, where user's show lists can be seen</li>
+                <li>user can update lists using plus buttons</li>
+                <li>displays elements from watchedList, watchingList, and favoriteShowsList tables</li>
+				<li>linked to addshow.php from plus buttons</li>
+				<li>will soon truncate titles and creators to fit in the list elements</li>
+			</ul>
+		</ul>
+		<ul>
+		<li><strong>likes.php</strong></li>
+			<ul>
+                <li>a view of the list of the comments the user has liked</li>
+				<li>linked to from the user's profile</li>
+				<li>may soon allow user to navigate to liked comment in ep/ch page by clicking it</li>
+			</ul>
+		</ul>
+		<ul>
+		<li><strong>addbookfavorites.php</strong> uses stylesheet.css, dbAccess.php (getBooksList, getBookInfo), addBookToFavorites.php</li>
+			<ul>
+                <li>an interface for user to add a book to the Favorites list on their profile</li>
+                <li>soon to be linked to by the plus button on the Favorites list on profilebooks.php</li>
+                <li>adds selection to favoriteBooksList table</li>
+			</ul>
+		</ul>
+		
+		<ul>
+			<li><strong>addbookread.php</strong> uses stylesheet.css, dbAccess.php (getBooksList, getBookInfo), addBookToRead.php</li>
+				<ul>
+					<li>an interface for user to add a book to the Read list on their profile</li>
+					<li>soon to be linked to by the plus button on the Read list on profilebooks.php</li>
+					<li>adds selection to readList table</li>
+				</ul>
+		</ul>
+
+		<ul>
+			<li><strong>addbookreading.php</strong> uses stylesheet.css, dbAccess.php (getBooksList, getBookInfo), addBookToReading.php</li>
+				<ul>
+					<li>an interface for user to add a book to the Reading list on their profile</li>
+					<li>soon to be linked to by the plus button on the Reading list on profilebooks.php</li>
+					<li>adds selection to readingList table</li>
+				</ul>
+		</ul>
+
+		<ul>
+			<li><strong>addshowfavorites.php</strong> uses stylesheet.css, dbAccess.php (getShowsList, getShowInfo), addShowToFavorites.php</li>
+				<ul>
+					<li>an interface for user to add a show to the Favorites list on their profile</li>
+					<li>soon to be linked to by the plus button on the Favorites list on profileshows.php</li>
+					<li>adds selection to favoriteShowsList table</li>
+				</ul>
+		</ul>
+
+		<ul>
+			<li><strong>addshowwatched.php</strong> uses stylesheet.css, dbAccess.php (getShowsList, getShowInfo), addShowToWatched.php</li>
+				<ul>
+					<li>an interface for user to add a show to the Watched list on their profile</li>
+					<li>soon to be linked to by the plus button on the Watched list on profileshows.php</li>
+					<li>adds selection to watchedList table</li>
+				</ul>
+		</ul>
+
+		<ul>
+			<li><strong>addshowwatching.php</strong> uses stylesheet.css, dbAccess.php (getShowsList, getShowInfo), addShowToWatching.php</li>
+				<ul>
+					<li>an interface for user to add a show to the Watching list on their profile</li>
+					<li>soon to be linked to by the plus button on the Watching list on profileshows.php</li>
+					<li>adds selection to watchingList table</li>
+				</ul>
+		</ul>
+
+        <h3>Thread Related</h3>
+        <ul>
+		<li><strong>episode.php</strong> uses stylesheet.css, dbAccess.php (getEpInfo, getEpComments)</li>
+			<ul>
+                <li>a view of the list of comments under an episode</li>
+                <li>displays replies for a given comment</li>
+				<li>linked to by episode entries in show.php</li>
+				<li>will soon allow likes to be added to a user's likes table by the click of a heart button</li>
+			</ul>
+        </ul>
+        <ul>
+		<li><strong>show.php</strong> uses stylesheet.css, dbAccess.php (getShowInfo, getEpsListByDate, getEpInfo)</li>
+			<ul>
+                <li>a view of the list of episodes for a show</li>
+                <li>will soon be linked to by a shows.php file</li>
+                <li>allows user to navigate to a given episode's episode.php page</li>
+			</ul>
+		</ul>
+		<ul>
+		<li><strong>shows.php</strong></li>
+			<ul>
+                <li>a view of the list of shows</li>
+                <li>allows user to navigate to a given show's show.php page</li>
+			</ul>
+		</ul>
+		<ul>
+		<li><strong>book.php</strong></li>
+			<ul>
+				<li>a view of the list of chapters for a book</li>
+				<li>linked to by a books.php file</li>
+				<li>will allow user to navigate to a given chapter's chapter.php page</li>
+			</ul>
+		</ul>
+		<ul>
+		<li><strong>books.php</strong></li>
+			<ul>
+				<li>a view of the list of books</li>
+				<li>allows user to navigate to a given book's book.php page</li>
+			</ul>
+		</ul>
+        
+        <h3>Coming Soon</h3>
+        <ul class="soon">
+		<li><strong>chapter.php</strong></li>
+			<ul>
+                <li>a view of the list of comments under a chapter</li>
+                <li>will display replies for a given comment</li>
+                <li>will be linked to by a book.php file</li>
+			</ul>
+        </ul>
+		
+	</div>
+</body>
+</html>
