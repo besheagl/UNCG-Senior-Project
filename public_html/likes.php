@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+?>
+<!--Last updated at 1500 hours-->
 <html>
     <head>
         <title>Armchair Likes</title>
@@ -102,61 +105,48 @@
             }
 
         </style>
-
     </head>
 
 
     <body>
-    
-    <?php
-        require 'dbAccess.php';	//uses dbAccess.php library
-        $username="fanAcct";
-        $likes = getLikesByUser($con, $username);//htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
-    ?>
+        <?php
+            require 'dbAccess.php';	//uses dbAccess.php library
+            $username= $_SESSION["login_username"];
+            $likes = getLikesByUser($con, $username);//htmlspecialchars($_GET["showID"]); //stores the variable showID from the url in php variable called $showID
+        ?>
 
         <header>
-            <img src="web_hi_res_512.png" style="width:20%" alt="armchair logo">
+            <img src="https://armchair.000webhostapp.com/web_hi_res_512.png" style="width:20%" alt="armchair logo">
             <div class="text">
                 <h1>Armchair</h1>
             </div>
-    
-            <div class="dropdown">
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="https://armchair.000webhostapp.com/shows.php">Shows</a>
-                <a href="https://armchair.000webhostapp.com/books.php">Books</a>
-                <a href="https://armchair.000webhostapp.com/profileshows.php">Profile</a>
-              </div>
-
-                <button class="dropbtn" onclick="openNav()"><div></div><div></div><div></div>
-                    <i class="fa fa-caret-down"></i>
-                </button>
-            </div>
+			<?php include 'menu.php'; ?> 
         </header>
 
-    <main>
-
-        <div class="threadlist">
-        <span class="listtitle"><h3>Likes</h3></span>
-        <ol class="medialist">
-        <?php foreach ($likes as $retval=>$info) { ?>
-                <li>
-                        <div class="location">
-                            <span class="username"><?php echo $info[4] ?></span>
-                            <br><br>
-                            <a href=<?php echo "'/episode.php/?showID=" . $info[2] . "&epTitle=".$info[3]."'";?> ><span class="title"><?php echo substr($info[6], 0, 50); //write title?></span></a>
-                            <?php if(strlen($info[6]) > 50)
-                                    echo "...";
-                            ?>
-                        </div>
-                </li>
-        <?php } ?>
-        </ol>
+        <main>
+            <div class="threadlist">
+                <span class="listtitle"><h3>Likes</h3></span>
+                    <ol class="medialist">
+                        <?php foreach ($likes as $retval=>$info) { ?>
+                        <li>
+                            <div class="location">
+                                <span class="username"><?php echo $info[4] ?></span>
+                                    <br><br>
+                                    <a href=<?php echo "'/episode.php/?showID=" . $info[2] . "&epTitle=".$info[3]."'";?> ><span class="title"><?php echo substr($info[6], 0, 50); //write title?></span></a>
+                                    <?php 
+                                    if(strlen($info[6]) > 50)
+                                        echo "...";
+                                    ?>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ol>
         <div class="threadlist">
     </main>
 
 
     <script>
+        //Functions for opening and closing the Side Navigation
         function openNav() {
           document.getElementById("mySidenav").style.width = "250px";
         }

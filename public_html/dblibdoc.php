@@ -57,6 +57,10 @@ code {
 ul.soon{
 	color: gray;
 }
+ul.sub{
+	position: relative;
+	left: 40px;
+}
 </style>
 <body>
 	<h1>dbAccess.php</h1>
@@ -154,6 +158,13 @@ echo "by " . $info[1] . "&lt/p&gt";
 			</ul>
 		</ul>
 		
+		<ul class = 'sub'>
+			<li><strong>epHasComments</strong>(connection, int showID, string epTitle) returns boolean</li>
+				<ul>
+					<li>returns true if a show has comments. Else, false</li>
+				</ul>
+		</ul>
+		
 		<ul>
 			<li><strong>getActorsByShow</strong>(connection, int showID) returns 2d string array</li>
 				<ul>
@@ -190,6 +201,13 @@ echo "by " . $info[1] . "&lt/p&gt";
 				</ul>
 		</ul>
 		
+		<ul class = 'sub'>
+			<li><strong>bookHasChs</strong>(connection, int isbn) returns boolean</li>
+				<ul>
+					<li>returns true if a book has chapters. Else, false</li>
+				</ul>
+		</ul>
+		
 		<ul class = 'soon'>
 			<li><strong>isRead</strong>(connection, int isbn, string username) returns boolean</li>
 				<ul>
@@ -206,18 +224,18 @@ echo "by " . $info[1] . "&lt/p&gt";
 		</ul>
 		
 		<ul>
-			<li><strong>chHasComments</strong>(connection, int isbn, string chTitle) returns boolean</li>
-				<ul>
-					<li>returns true if a chapter has comments. Else, false</li>
-				</ul>
-		</ul>
-		
-		<ul>
 			<li><strong>getChComments</strong>(connection, int isbn, string chTitle) returns 2d string array</li>
 			<ul>
 				<li>returns comments data for the chapter of given isbn and chTitle</li>
 				<li>extra column is at the end for cmRef</li>
 			</ul>
+		</ul>
+		
+		<ul class = 'sub'>
+			<li><strong>chHasComments</strong>(connection, int isbn, string chTitle) returns boolean</li>
+				<ul>
+					<li>returns true if a chapter has comments. Else, false</li>
+				</ul>
 		</ul>
 		
 		
@@ -281,14 +299,7 @@ echo "by " . $info[1] . "&lt/p&gt";
 			</ul>
 		</ul>
 		
-		<ul>
-			<li><strong>cmHasReplies</strong>(connection, int cmRef) returns boolean</li>
-				<ul>
-					<li>returns true if a comment has replies. Else, false</li>
-				</ul>
-		</ul>
-		
-		<ul>
+		<ul class = 'sub'>
 			<li><strong>cmHasLikes</strong>(connection, int cmRef) returns boolean</li>
 				<ul>
 					<li>returns true if a comment has likes. Else, false</li>
@@ -301,14 +312,28 @@ echo "by " . $info[1] . "&lt/p&gt";
 				<li>returns replies data for a comment of given cmRef</li>
 			</ul>
 		</ul>
+		
+		<ul class = 'sub'>
+			<li><strong>cmHasReplies</strong>(connection, int cmRef) returns boolean</li>
+				<ul>
+					<li>returns true if a comment has replies. Else, false</li>
+				</ul>
+		</ul>
 
 		
 		<h3>Accounts</h3>
 		
-		<ul class="soon">
+		<!--ul class="soon">
 			<li><strong>getAllWatched</strong>(connection, int a, int b) returns 2d string array<strong> COMING SOON</strong></li>
 			<ul>
 				<li>returns showID and epTitle for <strong>all</strong> watched episodes for all users in the range of a to b</li>
+			</ul>
+		</ul-->
+		
+		<ul>
+			<li><strong>getUserInfo</strong>(connection, string username) returns string array</li>
+			<ul>
+				<li>returns info for given username</li>
 			</ul>
 		</ul>
 		
@@ -366,6 +391,13 @@ echo "by " . $info[1] . "&lt/p&gt";
 			<ul>
 				<li>returns showID for shows watched by the given user</li>
 			</ul>
+		</ul>
+		
+		<ul class = 'sub'>
+			<li><strong>userHasWatched</strong>(connection, string username) returns boolean</li>
+				<ul>
+					<li>returns true if a user has watched any shows. Else, false</li>
+				</ul>
 		</ul>
 		
 		<ul>

@@ -1,0 +1,11 @@
+p{
+	font-size: 5vw;
+	font-family: Verdana, Geneva, sans-serif;
+	margin: 4vw 4vw;
+}
+a:visited{
+	color: purple;
+}
+a.backbtn{
+	color: purple;
+}
