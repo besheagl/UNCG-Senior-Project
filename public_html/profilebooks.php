@@ -1,7 +1,7 @@
 <?php
     session_start();
 ?>
-<!--Last updated at 1220 hours 4/28/2020-->
+<!--Last updated at 1500 hours-->
 <html>
     <head>
         <title>Armchair Profile</title>
@@ -54,12 +54,12 @@
             </a>
             <div class="profileusername">
                 <span class="profileusername"style="font-size: 5vw;
-                      color: #6884b0; margin-left: 35%; margin-bottom: 40%; position: relative; right: 14vw; top: 15vw;"><?php echo $dispusername ?></span>
+                      color: #6884b0; margin-left: 35%; margin-bottom: 40%"><?php echo $dispusername ?></span>
             </div>
             <span class="switch" style= "display: block; margin-left: 30px; margin-bottom: 20px">
 				<a href="https://armchair.000webhostapp.com/profileshows.php/?dispusername=<?php echo $dispusername; ?>" 
 					class="switchshows" style=" font-weight: bold;  margin-bottom: 5%; padding-top: 8px;padding-right: 10px;padding-bottom: 8px; 
-					padding-left: 10px;" >Switch to Shows</a>
+					padding-left: 10px; margin-left: 5%;" >Switch to Shows</a>
 				<a href="likes.php" class="switchlikes" style="font-weight: bold;  padding-top: 5px;padding-right: 8px;padding-bottom: 5px;
 					padding-left: 6px;margin-left: 50px" >Likes</a>
 			</span>
