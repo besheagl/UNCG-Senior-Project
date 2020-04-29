@@ -1,4 +1,5 @@
 <?php
+//session_start();
 require 'connect.php';
 
 //	shows
@@ -360,6 +361,32 @@ function getCommentInfo($con, $cmRef) {
 	}
 }
 
+function getUserInfo($con, $username) {
+	$retval = array();
+	$defaultFields = array("username", "email", "password", "options", "imgID");
+	$sqlstr = "SELECT * FROM `accounts` WHERE accounts.username = '" . $username . "';";
+	$rows = $con->query($sqlstr);
+	
+	if ($rows->num_rows > 0){
+		$row = $rows->fetch_assoc();
+		$record = array();
+		for($j = 0; $j < count($defaultFields); $j++){
+			array_push($record, $row[$defaultFields[$j]]);
+		}
+		return $record;
+	}
+}
+
+function addImg($con, $imgID, $username){
+	$imgID = mysqli_real_escape_string($con, $imgID);
+	$username = mysqli_real_escape_string($con, $username);
+	$sqlstr = "UPDATE `accounts`
+	           SET `imgID` = '".$imgID."'
+	           WHERE `accounts`.`username` = '".$username."'";
+    echo $sqlstr; //debug
+     $con->query($sqlstr);
+}
+
 function getCommentsByUser($con, $username) {
 	$retval = array();
 	$defaultFields = array("cmRef", "type", "cmID");
@@ -401,7 +428,18 @@ function getWatchedByUser($con, $username) { //by Brianna, can be removed if nee
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing watched by user in database");
+	//	trigger_error("Nothing watched by user in database");
+	}
+}
+function userHasWatched($con, $username) { //by Brianna, can be removed if needed
+	$retval = array();//'watchedList' WHERE watchedList.username = username
+	$sqlstr = "SELECT * FROM watchedList WHERE watchedList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
+	//	trigger_error("Nothing watched by user in database");
 	}
 }
 
@@ -416,7 +454,20 @@ function getWatchingByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing being watched by user in database");
+	//	trigger_error("Nothing being watched by user in database");
+	    
+	}
+}
+
+function userHasWatching($con, $username) {
+	$retval = array();
+	$sqlstr = "SELECT * FROM `watchingList` WHERE watchingList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
+	    
 	}
 }
 
@@ -431,7 +482,18 @@ function getFavoriteShowsByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("No favorite shows for user in database");
+	//	trigger_error("No favorite shows for user in database");
+	}
+}
+
+function userHasFavoriteShows($con, $username) {
+	$retval = array();
+	$sqlstr = "SELECT * FROM `favoriteShowsList` WHERE favoriteShowsList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -446,7 +508,18 @@ function getReadByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing read by user in database");
+		//trigger_error("Nothing read by user in database");
+	}
+}
+
+function userHasRead($con, $username) {
+	$retval = array();
+	$sqlstr = "SELECT * FROM `readList` WHERE readList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -461,7 +534,18 @@ function getReadingByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing being read by user in database");
+		//trigger_error("Nothing being read by user in database");
+	}
+}
+
+function userHasReading($con, $username) {
+	$retval = array();
+	$sqlstr = "SELECT * FROM `readingList` WHERE readingList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -476,7 +560,18 @@ function getFavoriteBooksByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("No favorite books for user in database");
+		//trigger_error("No favorite books for user in database");
+	}
+}
+
+function userHasFavoriteBooks($con, $username) {
+	$retval = array();
+	$sqlstr = "SELECT * FROM `favoriteBooksList` WHERE favoriteBooksList.username = '" . $username ."';";
+	$rows = $con->query($sqlstr);
+	if ($rows->num_rows > 0){
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -493,7 +588,7 @@ function getLikesByUser($con, $username) {
 		}
 		return $retval;
 	} else {
-		trigger_error("Nothing liked by user in database");
+		//trigger_error("Nothing liked by user in database");
 	}
 }
 
@@ -572,7 +667,17 @@ function addRead($con, $username, $isbn){
 	$username = mysqli_real_escape_string($con, $username);
 	$isbn = mysqli_real_escape_string($con, $isbn);
     $sqlstr = "INSERT INTO `readList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
-    echo $sqlstr; //debug
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeRead($con, $username, $isbn){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $isbn);
+	$sqlstr = "DELETE FROM `readList` WHERE `readList`.`username` = '$username' AND `readList`.`isbn` = '$isbn'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
@@ -581,7 +686,17 @@ function addReading($con, $username, $isbn){
 	$username = mysqli_real_escape_string($con, $username);
 	$isbn = mysqli_real_escape_string($con, $isbn);
     $sqlstr = "INSERT INTO `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
-    echo $sqlstr; //debug
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeReading($con, $username, $isbn){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $isbn);
+	$sqlstr = "DELETE FROM `readingList` WHERE `readingList`.`username` = '$username' AND `readingList`.`isbn` = '$isbn'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
@@ -589,8 +704,18 @@ function addReading($con, $username, $isbn){
 function addFavoriteBooks($con, $username, $isbn){
 	$username = mysqli_real_escape_string($con, $username);
 	$isbn = mysqli_real_escape_string($con, $isbn);
-    $sqlstr = "INSERT INTO `favoriteBooksList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
-    echo $sqlstr; //debug
+    $sqlstr = "INSERT INTO `favoriteBooksList` (`username`, `isbn`) VALUES ('".$username."', '".$isbn."')";
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeFavoriteBook($con, $username, $isbn){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $isbn);
+	$sqlstr = "DELETE FROM `favoriteBooksList` WHERE `favoriteBooksList`.`username` = '$username' AND `favoriteBooksList`.`isbn` = '$isbn'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
@@ -598,8 +723,18 @@ function addFavoriteBooks($con, $username, $isbn){
 function addWatched($con, $username, $showID){
 	$username = mysqli_real_escape_string($con, $username);
 	$showID = mysqli_real_escape_string($con, $showID);
-    $sqlstr = "INSERT INTO `watchedList` (`username`, `showID`) VALUES ('$username', '$showID')";
-    echo $sqlstr; //debug
+    $sqlstr = "INSERT INTO `watchedList` (`username`, `showID`) VALUES ('".$username."', '".$showID."')";
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeWatched($con, $username, $showID){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $showID);
+	$sqlstr = "DELETE FROM `watchedList` WHERE `watchedList`.`username` = '$username' AND `watchedList`.`showID` = '$showID'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
@@ -607,8 +742,18 @@ function addWatched($con, $username, $showID){
 function addWatching($con, $username, $showID){
 	$username = mysqli_real_escape_string($con, $username);
 	$showID = mysqli_real_escape_string($con, $showID);
-    $sqlstr = "INSERT INTO `watchingList` (`username`, `showID`) VALUES ('$username', '$showID')";
-    echo $sqlstr; //debug
+    $sqlstr = "INSERT INTO `watchingList` (`username`, `showID`) VALUES ('".$username."', '".$showID."')";
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeWatching($con, $username, $showID){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $showID);
+	$sqlstr = "DELETE FROM `watchingList` WHERE `watchingList`.`username` = '$username' AND `watchingList`.`showID` = '$showID'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
@@ -616,27 +761,24 @@ function addWatching($con, $username, $showID){
 function addFavorites($con, $username, $showID){
 	$username = mysqli_real_escape_string($con, $username);
 	$showID = mysqli_real_escape_string($con, $showID);
-    $sqlstr = "INSERT INTO `favoriteShowsList` (`username`, `showID`) VALUES ('$username', '$showID')";
-    echo $sqlstr; //debug
+    $sqlstr = "INSERT INTO `favoriteShowsList` (`username`, `showID`) VALUES ('".$username."', '".$showID."')";
+    //echo $sqlstr; //debug
+    //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
+     $con->query($sqlstr);
+}
+
+function removeFavorites($con, $username, $showID){
+	$username = mysqli_real_escape_string($con, $username);
+	$isbn = mysqli_real_escape_string($con, $showID);
+	$sqlstr = "DELETE FROM `favoriteShowsList` WHERE `favoriteShowsList`.`username` = '$username' AND `favoriteShowsList`.`showID` = '$showID'";
+    //$sqlstr = "DELETE FROM `readingList` (`username`, `isbn`) VALUES ('$username', '$isbn')";
+    //echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
 
 function addEpComment($con, $username, $showID, $epTitle, $body){
 	$sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','".date("y-m-d")."', '".$body."')";
-	if ($con->query($sqlstr) === TRUE){
-		$newcmID = $con->insert_id;
-		echo "GOOD " . $newcmID;	//debug
-		$sqlstr = "INSERT INTO allComments(cmRef, type, cmID) VALUES(NULL, 'ep', " . $newcmID . ")";
-		$con->query($sqlstr);
-	} else {
-		$newcmID = $con->insert_id;
-		echo "BAD " . $newcmID;	//debug
-	}
-}
-
-function addChComment($con, $username, $isbn, $chTitle, $body){
-	$sqlstr = "INSERT INTO chComments(cmID, chTitle, isbn, poster, date, body) VALUES(NULL, " . $chTitle . "," . $isbn . ", '".$username."','".date("y-m-d")."', '".$body."')";
 	if ($con->query($sqlstr) === TRUE){
 		$newcmID = $con->insert_id;
 		//echo "GOOD " . $newcmID;	//debug
@@ -648,9 +790,22 @@ function addChComment($con, $username, $isbn, $chTitle, $body){
 	}
 }
 
+function addChComment($con, $username, $isbn, $chTitle, $body){
+	$sqlstr = "INSERT INTO chComments(cmID, chTitle, isbn, poster, date, body) VALUES(NULL, " . $chTitle . "," . $isbn . ", '".$username."','".date("y-m-d")."', '".$body."')";
+	if ($con->query($sqlstr) === TRUE){
+		$newcmID = $con->insert_id;
+		//echo "GOOD " . $newcmID;	//debug
+		$sqlstr = "INSERT INTO allComments(cmRef, type, cmID) VALUES(NULL, 'ch', " . $newcmID . ")";
+		$con->query($sqlstr);
+	} else {
+		$newcmID = $con->insert_id;
+		//echo "BAD " . $newcmID;	//debug
+	}
+}
+
 function addReply($con, $cmRef, $poster, $body){
 	$sqlstr = "INSERT INTO replies(replyID, cmRef, poster, date, body) VALUES(NULL, " . $cmRef . ",'" . $poster . "','".date("y-m-d")."', '".$body."')";
-	echo $sqlstr;	//debug
+	//echo $sqlstr;	//debug
 	$con->query($sqlstr);
 }
 
@@ -670,15 +825,10 @@ function addLike($con, $username, $cmRef){
 	$username = mysqli_real_escape_string($con, $username);
     $cmRef = mysqli_real_escape_string($con, $cmRef);
     $date = getCommentInfo($con, $cmRef)[5];
-    $sqlstr = "INSERT INTO `likes` (`cmRef`, `username`, `date`) VALUES ('$cmRef', '$username', '$date')";
+    $sqlstr = "INSERT INTO `likes` (`cmRef`, `username`, `date`) VALUES ('".$cmRef."', '".$username."', '".$date."')";
     echo $sqlstr; //debug
     //reference: $sqlstr = "INSERT INTO epComments(cmID, epTitle, showID, poster, date, body) VALUES(NULL, '" . $epTitle . "'," . $showID . ", '".$username."','2020-04-07', '".$body."')";
      $con->query($sqlstr);
 }
-
-function dummy() {
-	echo "ur dum";
-}
-
-$username = "fanAcct";
+// $username = $_SESSION["login_username"];
 ?>
