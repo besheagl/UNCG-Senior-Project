@@ -56,7 +56,10 @@
                 <span class="profile-img" style="background-image: url('https://armchair.000webhostapp.com/uploads/<?php echo $userinfo[4]?>'); ">
                  </a>
              
-                <div  class="profileusername" style="display:inline-block; font-size: 5vw; color: #6884b0; margin-left: 25vw; text-align:left; margin-top: 0vw; " ><?php echo $dispusername ?><br></div></span>
+            <div class="profileusername">
+                <span class="profileusername"style="font-size: 5vw;
+                      color: #6884b0; margin-left: 35%; margin-bottom: 40%"><?php echo $dispusername ?></span>
+            </div>
             <span class="switch" style= "display: block; margin-left: 30px; margin-bottom: 20px"><a href="https://armchair.000webhostapp.com/profilebooks.php/?dispusername=<?php echo $dispusername; ?>" class="switchbooks"style=" font-weight: bold;  margin-bottom: 5%; padding-top: 8px;padding-right: 10px;padding-bottom: 8px; padding-left: 10px; ;" >Switch to Books</a>
                 <a href="https://armchair.000webhostapp.com/likes.php" class="switchlikes" style="font-weight: bold;  padding-top: 5px;padding-right: 8px;padding-bottom: 5px;
                  padding-left: 6px;margin-left: 50px" >Likes</a></span>
